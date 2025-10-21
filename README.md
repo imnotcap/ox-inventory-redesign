@@ -19,6 +19,10 @@ legacy, spunK(wut) & emptyy
 - Utility (ui er lavet) - vær velkommen til at fork og lav crafting, så vi allesammen kan nyde af det. :)
 - Searchbar har måske et problem med movement.
 
+- Target fejl inde i client.lua med limitless-targeting (omdan den til ox_target)
+- Slet alle items hvis du får fejl, og lav dine egne.
+- Hvis der er flere fejl, da denne version er for et custom framework, så sig endelig til.
+
 ## ✨ Features
 
 - Drag n' Drop shop.

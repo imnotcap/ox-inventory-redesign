@@ -24,7 +24,7 @@ https://discord.gg/mjXCDRJ2hf
 - Rarity system.
 - Utility System (kun ui indtil videre) -skjult.
 
-![Nyt Projekt](https://github.com/user-attachments/assets/cf2cc1a0-90f5-458a-ad08-4810c4d78626)
+![Nyt Projekt (1)](https://github.com/user-attachments/assets/623ebd2a-7a14-416b-818e-d8d1a8da7a25)
 
 ## 📚 Documentation
 

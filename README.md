@@ -10,6 +10,9 @@ Husk at byg inventoriet før brug, ellers er det bare plug n' play. (få items e
 
 https://discord.gg/mjXCDRJ2hf
 
+Credits:
+legacy, spunK(wut) & emptyy
+
 ## Ting der mangler & fejl
 
 - Crafting (ui er lavet) - vær velkommen til at fork og lav crafting, så vi allesammen kan nyde af det. :)

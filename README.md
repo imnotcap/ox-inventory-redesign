@@ -1,4 +1,6 @@
+
 ## Casper's Redesign
+!! IKKE FÆRDIGT !!
 
 Dette redesign er en WIP, udgivet for at folk kan lave videre på det. Jeg har tilføjet et custom shop system som prod, og crafting system (wip).
 Brug den sunde fornuft, og join gerne min discord så vi kan dele ideér og lave flere ting i fællesskab.
@@ -8,6 +10,12 @@ Husk at byg inventoriet før brug, ellers er det bare plug n' play. (få items e
 
 https://discord.gg/mjXCDRJ2hf
 
+## Ting der mangler & fejl
+
+- Crafting (ui er lavet) - vær velkommen til at fork og lav crafting, så vi allesammen kan nyde af det. :)
+- Utility (ui er lavet) - vær velkommen til at fork og lav crafting, så vi allesammen kan nyde af det. :)
+- Searchbar har måske et problem med movement.
+
 ## ✨ Features
 
 - Drag n' Drop shop.
@@ -15,6 +23,8 @@ https://discord.gg/mjXCDRJ2hf
 - Inspireret og fuldendt design.
 - Rarity system.
 - Utility System (kun ui indtil videre) -skjult.
+
+![Nyt Projekt](https://github.com/user-attachments/assets/cf2cc1a0-90f5-458a-ad08-4810c4d78626)
 
 ## 📚 Documentation
 

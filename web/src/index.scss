@@ -1,0 +1,985 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+$mainColor: #22232c;
+$textColor: #c1c2c5;
+$mainFont: Geist;
+
+$secondaryColor: rgba(30, 30, 30, 0.85);
+$secondaryColorHighlight: #33343F;
+$secondaryColorLight: rgba(0, 0, 0, 0.5);
+$secondaryColorDark: rgba(12, 12, 12, 0.8);
+
+$gridCols: 4;
+$gridRows: 3;
+$gridSize: 11vh;
+$gridGap: 10px;
+$containerSize: calc(#{$gridRows} * #{$gridSize + 0.22vh} + #{$gridRows} * #{$gridGap});
+
+body {
+  margin: 0;
+  font-family: 'Geist', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  background: none !important;
+  overflow: hidden !important;
+  user-select: none;
+}
+
+#root {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+input {
+  border-radius: 4px;
+  width: 8vh;
+  padding: 8px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  outline: none;
+}
+
+.split-button {
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616da, #00000079) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(0, 0, 0, 0.589)) border-box;
+  color: white;
+  outline: none;
+}
+
+::-webkit-search-cancel-button {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #161616bb;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #77deb9;
+  border-radius: 3px;
+  
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-family: $mainFont;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.app-wrapper {
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+
+.context-menu-list {
+  min-width: 100px;
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616da, #000000e0) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(0, 0, 0, 0.589)) border-box;
+  color: white;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.context-menu-item  {
+  padding: 8px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 1.2vh;
+  font-weight: 500;
+  color: #aca5b4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:active {
+    transform: none;
+  }
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.left-inventory {
+  transform: perspective(1000px) skewX(0deg) rotateY(10deg) rotateX(0deg);
+  transform-origin: center;
+}
+
+.utils-inventory {
+  transform: perspective(1000px)  skewX(0deg) rotateY(-10deg) rotateX(0deg);
+  transform-origin: center;
+}
+
+.right-inventory {
+  transform: perspective(1000px)  skewX(0deg) rotateY(-10deg) rotateX(0deg);
+  transform-origin: center;
+}
+
+.tooltip-description {
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616da, #000000e0) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(0, 0, 0, 0.589)) border-box;
+}
+
+.tooltip-ammo {
+  margin-top: 0.5rem;
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.tooltip-ammo a {
+  font-size: 1.2vh;
+  color: white;
+}
+
+.tooltip-durability {
+  margin-top: 0.5rem;
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  color: rgba(255,255,255,0.7);
+  a {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2vh;
+    display: flex;
+    margin-top: 8px;
+  }
+}
+
+.tooltip-markdown > p {
+  margin: 0;
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+.item-drag-preview {
+  width: 7.7vh;
+  height: 7.7vh;
+  z-index: 1;
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 7vh;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.inventory-wrapper {
+  position: relative;
+  display: flex;
+  padding-left: 12rem;
+  padding-right: 12rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.inventory-control {
+  display: flex;
+
+  .inventory-control-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.useful-controls-dialog {
+  background-color: $mainColor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: $textColor;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 4px;
+  gap: 16px;
+}
+
+.useful-controls-dialog-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.useful-controls-dialog-title {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.useful-controls-dialog-close {
+  width: 25px;
+  height: 25px;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  fill: $textColor;
+  &:hover {
+    background-color: $secondaryColorHighlight;
+    cursor: pointer;
+  }
+}
+
+.useful-controls-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.useful-controls-button {
+  position: absolute !important;
+  bottom: 25px;
+  right: 25px;
+  transition: 200ms !important;
+  border: none;
+  color: white;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: white;
+  border-radius: 5% !important;
+  background-color: $secondaryColor !important;
+  &:hover {
+    background-color: $secondaryColorDark !important;
+    cursor: pointer;
+  }
+}
+
+.useful-controls-exit-button {
+  position: absolute !important;
+  right: 8px;
+  top: 8px;
+  border-radius: 2.5% !important;
+  color: grey !important;
+}
+
+// Dialog is used fro useful controls window
+
+
+// inventory grids
+.inventory-grid-wrapper {
+  background-color: rgba(30, 30, 30, 0.75);
+  border: 2px solid #7e7e7e5b;
+  padding-left: 2.5vh;
+  padding-right: 2.5vh;
+  padding-top: 1vh;
+  padding-bottom:2vh;
+  border-radius: 1vh;
+  display: flex;
+  flex-direction: column;
+  gap: calc($gridGap * 1);
+}
+
+.inventory-grid-header-wrapper2 {
+  h1 {
+    font-size: 1.5vh;
+    font-weight: 700;
+  }
+  align-items: center;
+  display: flex;
+  gap: 2vh;
+  padding-bottom: 2px;
+}
+.inventory-grid-header-wrapper p, i {
+  font-size: 1.3vh;
+  font-weight: 400;
+}
+
+.inventory-grid-header-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inventory-grid-header-weight p {
+  display: flex;
+  align-items: center;
+  gap: 0.75vh;
+}
+
+.utils-left-grid {
+  display: grid;
+  height: $containerSize;
+  grid-template-columns: repeat(1, $gridSize);
+  grid-auto-rows: $gridSize + 0.22vh;
+  gap: 15px;
+}
+
+.utils-middle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, $gridSize);
+  grid-auto-rows: $gridSize + 0.22vh;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.utils-right-grid {
+  display: grid;
+  height: $containerSize;
+  grid-template-columns: repeat(1, $gridSize);
+  grid-auto-rows: $gridSize + 0.22vh;
+  gap: 15px;
+}
+
+.man-svg {
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(162, 202, 49, 0.25)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.inventory-grid-container {
+  display: grid;
+  height: $containerSize;
+  grid-template-columns: repeat($gridCols, $gridSize);
+  grid-auto-rows: $gridSize + 0.22vh;
+  gap: $gridGap;
+  overflow-y: scroll;
+}
+
+// inventory slots
+.inventory-slot {
+  padding: 10px;
+  background-color: $secondaryColor;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 5%;
+  image-rendering: -webkit-optimize-contrast;
+  position: relative;
+  color: $textColor;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.inventory-slot-label-box {
+  // background-color: $mainColor;
+  color: $textColor;
+  align-items:end;
+  justify-content: space-between;
+  display: flex;
+}
+
+.inventory-slot-label-text {
+  text-transform: capitalize;
+  overflow: hidden;
+  font-weight: 900;
+  font-family: $mainFont;
+  font-size: 1vh;
+  white-space: normal;       /* allow wrapping */
+  word-wrap: break-word;     /* break long words if needed */
+  word-break: break-word;    /* extra safety */
+  overflow-wrap: anywhere;   /* modern property */
+}
+
+.inventory-slot-rarity {
+  padding: 3px;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-top-left-radius: 0.25vh;
+  border-bottom-right-radius: 0.25vh;
+  font-size: 0.8vh;
+  font-family: $mainFont;
+}
+
+.item-slot-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  p {
+    font-size: 1vh;
+  }
+}
+
+#test1 {
+  color: #161616bb;
+}
+
+.item-slot-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between !important;
+}
+
+.item-hotslot-header-wrapper {
+  @extend .item-slot-header-wrapper;
+}
+
+.item-slot-info-wrapper {
+  color: #ffffff83;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  white-space: normal;       /* allow wrapping */
+  word-wrap: break-word;     /* break long words if needed */
+  word-break: break-word;    /* extra safety */
+  overflow-wrap: anywhere;   /* modern property */
+  padding: 3px;
+  gap: 3px;
+  p {
+    font-size: 0.8vh;
+  }
+}
+
+.item-slot-currency-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 3px;
+  p {
+    font-size: 14px;
+    text-shadow: 0.1vh 0.1vh 0 rgba(0, 0, 0, 0.7);
+  }
+}
+
+.item-slot-price-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 3px;
+  p {
+    font-size: 14px;
+    text-shadow: 0.1vh 0.1vh 0 rgba(0, 0, 0, 0.7);
+  }
+}
+
+
+.tooltip-wrapper {
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616da, #000000e0) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(0, 0, 0, 0.589)) border-box;
+  color: white;
+
+  pointer-events: none;
+  display: flex;
+  width: 28vh;
+  max-width: calc(15% - 20px);
+  flex-direction: column;
+  min-width: 200px;
+  color: $textColor;
+  font-family: $mainFont;
+  p {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.tooltip-header-wrapper {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  p {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+.tooltip-crafting-duration {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  svg {
+    padding-right: 3px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+
+.tooltip-ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tooltip-ingredient {
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616da, #000000e0) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(0, 0, 0, 0.589)) border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  img {
+    width: 28px;
+    height: 28px;
+    padding-right: 5px;
+  }
+}
+
+// hotbar
+.hotbar-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 2vh;
+}
+
+.inventory-slot-number {
+  position: absolute;
+  color: $secondaryColor;
+  padding-top: 2px;
+  font-weight: 800;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-right-radius: 6px;
+  font-size: 0.9vh;
+  left: 0;
+  top: 0;
+}
+
+.hotbar-item-slot {
+  @extend .inventory-slot;
+  width: 9vh;
+  height: 9vh;
+}
+
+.hotbar-slot-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// item notifications
+
+.item-notification-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2px;
+  position: absolute;
+  bottom: 20vh;
+  left: 50%;
+  width: 100%;
+  margin-left: calc(50% - calc($gridSize/2));
+  transform: translate(-50%);
+}
+
+.item-notification-item-box {
+  @extend .inventory-slot;
+  height: $gridSize;
+  width: $gridSize;
+}
+
+.durability-bar {
+  // background: rgba(0, 0, 0, 0.5);
+  height: 4px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0px;
+  border-bottom-left-radius: 3.5px;
+  border-bottom-right-radius: 3.5px;
+}
+
+.weight-bar {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1.5px solid rgba(124, 124, 124, 0.493);
+  border-radius: 10rem;
+  height: 0.8vh;
+  overflow: hidden;
+}
+
+.transition-fade-enter {
+  opacity: 0;
+}
+
+.transition-fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.transition-fade-exit {
+  opacity: 1;
+}
+
+.transition-fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.transition-slide-up-enter {
+  transform: translateY(200px)
+}
+
+.transition-slide-up-enter-active {
+  transform: translateY(0px);
+  transition: all 200ms;
+}
+
+.transition-slide-up-exit {
+  transform: translateY(0px);
+}
+
+.transition-slide-up-exit-active {
+  transform: translateY(200px);
+  transition: all 200ms;
+}
+
+.right-inventories-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.right-inventories-container {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding-right: 8px; /* Space for scrollbar */
+}
+
+.right-inventories-scrollable {
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* No gap between inventories to keep same spacing */
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+.right-inventories-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.right-inventories-scrollable::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.right-inventories-scrollable::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.right-inventories-scrollable::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.inventory-item {
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+/* Smooth transition for collapse/expand */
+.inventory-grid-container {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.backpack-wrapper {
+  padding-left: 2.5vh;
+  padding-right: 2.5vh;
+  display: flex;
+  flex-direction: column;
+  gap: calc($gridGap * 1);
+  height: fit-content;
+}
+
+.backpack-collapse {
+  transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+
+  &.open {
+    max-height: 400px; // Adjust as needed for your content
+    opacity: 1;
+  }
+}
+
+.inventory-switch {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 4px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616a1, #000000b6) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(0, 0, 0, 0.589)) border-box;
+
+  font-size: 1vh;
+  color: white;
+  font-weight: 500;
+}
+
+.inventory-switch-btn {
+  font-size: 1vh;
+  border-radius: 4px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616a1, #000000b6) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(0, 0, 0, 0.589)) border-box;
+
+}
+.inventory-switch:focus {
+  outline: none;
+  appearance: none;
+}
+
+.inventory-switch.active {
+  background: 
+  linear-gradient(45deg, #161616a1, rgba(119, 222, 185, 0.5)) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.336), rgba(154, 221, 47, 0.222)) border-box;
+}
+
+
+
+// SHOPPINGCART CASPER 
+
+.right-inventory {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+/* Shopping cart */
+.shopping-cart {
+  min-height: 20vh;
+  // transition: all 0.3s ease;
+  max-height: 30vh;
+}
+
+/* Highlight when dragging over */
+.shopping-cart.highlight {
+  border: 1px dashed #77deb9;
+}
+
+/* Empty message */
+.shopping-cart p {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.no-items {
+  text-align: center;
+  justify-content: center;
+  font-size: 1.75vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #ccc;
+
+  i {
+    font-size: 5vh;
+    color: #cccccc65;
+  }
+
+  p {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      font-size: 1vh;
+      color: #cccccc65;
+    }
+  }
+}
+
+/* Each cart item */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #00000093;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: transparent 1px solid;
+  gap: 0.5rem;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.cart-item-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 15.5vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-right: 0.5rem;
+}
+
+/* Item image */
+.cart-item img {
+  width: 6vh;
+  height: 6vh;
+  object-fit: contain;
+}
+
+/* Info + controls container */
+.cart-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Item name */
+.cart-info p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Quantity controls */
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-controls button {
+  background: #000000;
+  color: #fff;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.cart-controls button:hover {
+  background: #555;
+}
+
+/* Cart footer */
+.cart-footer {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid #555;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cart-footer p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: right;
+}
+
+.cart-footer button {
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid transparent; /* necessary for gradient border */
+
+  background: 
+  linear-gradient(45deg, #161616da, #00000046) padding-box, /* your original background */
+  linear-gradient(90deg, rgba(255, 255, 255, 0.151), rgba(0, 0, 0, 0.404)) border-box;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+
+// testing 
+
+.inventory-slot.above-legendary {
+  position: relative;
+  overflow: hidden;
+}
+
+.inventory-slot.above-legendary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://img1.picmix.com/output/stamp/normal/5/5/5/8/338555_605c5.gif') center/cover no-repeat;
+  opacity: 0.8;
+  pointer-events: none; /* don't block clicks */
+}

@@ -2,34 +2,34 @@
 ## Casper's Redesign
 !! IKKE FÆRDIGT !!
 
-Dette redesign er en WIP, udgivet for at folk kan lave videre på det. Jeg har tilføjet et custom shop system som prod, og crafting system (wip).
-Brug den sunde fornuft, og join gerne min discord så vi kan dele ideér og lave flere ting i fællesskab.
+This redesign is a work in progress, released so that people can continue working on it. I have added a custom shop system as prod, and a crafting system (work in progress).
+Use common sense, and feel free to join my Discord so we can share ideas and create more things together.
 
-Ikke resell, har valgt at lægge det op for alle så man ikke skal betale dyre domme for et redesign der ikke engang virker.
-Husk at byg inventoriet før brug, ellers er det bare plug n' play. (få items er tilføjet)
+Do not resell, I have chosen to make it available to everyone so you don't have to pay a lot for a redesign that doesn't even work.
+Remember to build the inventory before use, otherwise it's just plug n' play. (few items have been added)
 
 https://discord.gg/mjXCDRJ2hf
 
 Credits:
 legacy, spunK(wut) & emptyy
 
-## Ting der mangler & fejl
+## Missing items & bugs
 
-- Crafting (ui er lavet) - vær velkommen til at fork og lav crafting, så vi allesammen kan nyde af det. :)
-- Utility (ui er lavet) - vær velkommen til at fork og lav crafting, så vi allesammen kan nyde af det. :)
-- Searchbar har måske et problem med movement.
+- Crafting (ui is done) - feel free to fork and make crafting so we can all enjoy it. :)
+- Utility (ui is done) - feel free to fork and make crafting so we can all enjoy it. :)
+- Searchbar may have a problem with movement.
 
-- Target fejl inde i client.lua med limitless-targeting (omdan den til ox_target)
-- Slet alle items hvis du får fejl, og lav dine egne.
-- Hvis der er flere fejl, da denne version er for et custom framework, så sig endelig til.
+- Target error inside client.lua with limitless-targeting (convert it to ox_target)
+- Delete all items if you get errors and make your own.
+- If there are more errors, as this version is for a custom framework, please let us know.
 
 ## ✨ Features
 
 - Drag n' Drop shop.
 - Custom crafting system (wip)
-- Inspireret og fuldendt design.
+- Inspired and perfected design.
 - Rarity system.
-- Utility System (kun ui indtil videre) -skjult.
+- Utility System (ui only so far) -hidden.
 
 ![Nyt Projekt (1)](https://github.com/user-attachments/assets/623ebd2a-7a14-416b-818e-d8d1a8da7a25)
 

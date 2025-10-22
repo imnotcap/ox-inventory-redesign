@@ -1,6 +1,6 @@
 
 ## Casper's Redesign
-!! IKKE FÆRDIGT !!
+!! NOT DONE W.I.P !!
 
 This redesign is a work in progress, released so that people can continue working on it. I have added a custom shop system as prod, and a crafting system (work in progress).
 Use common sense, and feel free to join my Discord so we can share ideas and create more things together.

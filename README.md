@@ -34,7 +34,7 @@ legacy, spunK(wut) & emptyy
 ## In modules/shops.lua - line 165-201:
 Change this code to your frameworks.
 
-``local function canAffordItem(inv, currency, price)
+local function canAffordItem(inv, currency, price)
     if price < 0 then
         return {
             type = 'error',
@@ -70,7 +70,7 @@ local function removeCurrency(inv, currency, amount)
             user.removeBank(amount)
         end
     end
-end``
+end
 
 ![Nyt Projekt (1)](https://github.com/user-attachments/assets/623ebd2a-7a14-416b-818e-d8d1a8da7a25)
 

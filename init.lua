@@ -14,7 +14,7 @@ end
 
 shared = {
     resource = GetCurrentResourceName(),
-    framework = GetConvar('inventory:framework', 'limitless'),
+    framework = GetConvar('inventory:framework', 'qbx'),
     playerslots = GetConvarInt('inventory:slots', 50),
     playerweight = GetConvarInt('inventory:weight', 100000),
     target = GetConvarInt('inventory:target', 0) == 1,

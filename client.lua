@@ -923,24 +923,6 @@ local function registerCommands()
 	registerCommands = nil
 end
 
-Citizen.CreateThread(function()
-	exports['limitless-targeting']:AddGlobalVehicleOption({
-        options = {
-            {
-                icon = "fas fa-truck-ramp-box",
-                label = "Åben bagagerum",
-				onSelect = function(entity)
-					Inventory.OpenTrunk(entity)
-				end
-            },
-        },
-        help = false,
-        job = {'all'},
-        distance = 4.5,
-        icon = 'fas fa-car',
-    })
-end)
-
 function client.closeInventory(server)
 	-- because somehow people are triggering this when the inventory isn't loaded
 	-- and they're incapable of debugging, and I can't repro on a fresh install

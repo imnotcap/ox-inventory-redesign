@@ -31,6 +31,49 @@ legacy, spunK(wut) & emptyy
 - Rarity system.
 - Utility System (ui only so far) -hidden.
 
+## In modules/shops.lua - line 165-201:
+Change this code to your frameworks.
+
+```ruby
+local function canAffordItem(inv, currency, price)
+    if price < 0 then
+        return {
+            type = 'error',
+            description = locale('cannot_afford', 'invalid price')
+        }
+    end
+
+    if currency == 'cash' then
+        local count = Inventory.GetItemCount(inv, 'money')
+        if count >= price then return true end
+
+        return {
+            type = 'error',
+            description = locale('cannot_afford', locale('$') .. math.groupdigits(price))
+        }
+    elseif currency == 'bank' then
+        local user = exports['limitless-core']:getComponent('User'):GetPlayer(inv.id)
+        if user and user.bank >= price then return true end
+
+        return {
+            type = 'error',
+            description = locale('cannot_afford', math.groupdigits(price) .. ' Bank')
+        }
+	end
+end
+
+local function removeCurrency(inv, currency, amount)
+    if currency == 'money' then
+        Inventory.RemoveItem(inv, 'money', amount)
+    elseif currency == 'bank' then
+        local user = exports['limitless-core']:getComponent('User'):GetPlayer(inv.id)
+        if user then
+            user.removeBank(amount)
+        end
+    end
+end
+```
+
 ![Nyt Projekt (1)](https://github.com/user-attachments/assets/623ebd2a-7a14-416b-818e-d8d1a8da7a25)
 
 ## 📚 Documentation
